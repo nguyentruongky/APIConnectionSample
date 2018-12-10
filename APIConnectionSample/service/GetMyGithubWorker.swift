@@ -25,7 +25,7 @@ struct GetMyGithubWorker {
     
     func execute() {
         let finalApi = api + userName
-        ServiceConnector.get(finalApi, params: nil, header: nil,
+        ServiceConnector.get(finalApi, params: nil, headers: nil,
                              success: successResponse, fail: failResponse)
     }
     

@@ -11,7 +11,7 @@ import Alamofire
 
 struct ServiceConnector {
     static fileprivate var connector = AlamofireConnector()
-    static private func getHeader() -> [String: String]? {
+    static private func getHeaders() -> [String: String]? {
         return ["Content-Type": "application/json",
                 "X-Device-Id": "mobile_app"
             ]
@@ -25,49 +25,49 @@ struct ServiceConnector {
     static private func request(_ api: String,
                                 method: HTTPMethod,
                                 params: [String: Any]? = nil,
-                                header: [String: String]?,
+                                headers: [String: String]?,
                                 success: @escaping (_ result: AnyObject, _ data: Data?) -> Void,
                                 fail: ((_ error: Error) -> Void)? = nil) {
-        let finalHeader = header ?? getHeader()
+        let finalHeaders = headers ?? getHeaders()
         let apiUrl = getUrl(from: api)
         connector.request(withApi: apiUrl,
                           method: method,
                           params: params,
-                          header: finalHeader,
+                          header: finalHeaders,
                           success: success,
                           fail: fail)
     }
     
     static func get(_ api: String,
                     params: [String: Any]? = nil,
-                    header: [String: String]?,
+                    headers: [String: String]?,
                     success: @escaping (_ result: AnyObject, _ data: Data?) -> Void,
                     fail: ((_ error: Error) -> Void)? = nil) {
-        request(api, method: .get, params: params, header: header, success: success, fail: fail)
+        request(api, method: .get, params: params, headers: headers, success: success, fail: fail)
     }
     
     static func put(_ api: String,
                     params: [String: Any]? = nil,
-                    header: [String: String]?,
+                    headers: [String: String]?,
                     success: @escaping (_ result: AnyObject, _ data: Data?) -> Void,
                     fail: ((_ error: Error) -> Void)? = nil) {
-        request(api, method: .put, params: params, header: header, success: success, fail: fail)
+        request(api, method: .put, params: params, headers: headers, success: success, fail: fail)
     }
     
     static func post(_ api: String,
                     params: [String: Any]? = nil,
-                    header: [String: String]?,
+                    headers: [String: String]?,
                     success: @escaping (_ result: AnyObject, _ data: Data?) -> Void,
                     fail: ((_ error: Error) -> Void)? = nil) {
-        request(api, method: .post, params: params, header: header, success: success, fail: fail)
+        request(api, method: .post, params: params, headers: headers, success: success, fail: fail)
     }
     
     static func delete(_ api: String,
                     params: [String: Any]? = nil,
-                    header: [String: String]?,
+                    headers: [String: String]?,
                     success: @escaping (_ result: AnyObject, _ data: Data?) -> Void,
                     fail: ((_ error: Error) -> Void)? = nil) {
-        request(api, method: .delete, params: params, header: header, success: success, fail: fail)
+        request(api, method: .delete, params: params, headers: headers, success: success, fail: fail)
     }
 }
 
